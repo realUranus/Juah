@@ -2,6 +2,7 @@ package com.realuranus.juah;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +10,6 @@ import android.widget.ImageView;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
-import com.realuranus.juah.fragment.MyImgRecyclerViewAdapter;
-import com.realuranus.juah.fragment.dummy.DummyContent;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -24,6 +23,8 @@ import okhttp3.Response;
 public class JuahActivity extends AppCompatActivity {
     private final String TAG = "JuahActivity";
 
+    RecyclerView.LayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +33,30 @@ public class JuahActivity extends AppCompatActivity {
 
         Logger.addLogAdapter(new AndroidLogAdapter());
         Logger.t(TAG).i("onCreate");
+        RecyclerView recyclerView = findViewById(R.id.imgRecyclerView);
+        recyclerView.setHasFixedSize(true);
 
-        ImageView imageView = findViewById(R.id.hahah);
-        ImageView imageView2 = findViewById(R.id.hahah2);
-        Picasso.get().load("https://images.pexels.com/photos/2159549/pexels-photo-2159549.jpeg").into(imageView);
-        Picasso.get().load("https://images.pexels.com/photos/2166641/pexels-photo-2166641.jpeg").into(imageView2);
+        //set layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-        Button getBtn = findViewById(R.id.getBtn);
-        getBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Logger.t(TAG).i("get btn clicked");
-            }
-        });
+        //
+
+
+
+        //test
+//        ImageView imageView = findViewById(R.id.hahah);
+//        ImageView imageView2 = findViewById(R.id.hahah2);
+//        Picasso.get().load("https://images.pexels.com/photos/2159549/pexels-photo-2159549.jpeg").into(imageView);
+//        Picasso.get().load("https://images.pexels.com/photos/2166641/pexels-photo-2166641.jpeg").into(imageView2);
+//
+//        Button getBtn = findViewById(R.id.getBtn);
+//        getBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Logger.t(TAG).i("get btn clicked");
+//            }
+//        });
 
 //        RecyclerView recyclerView = findViewById(R.id.list);
 //        MyImgRecyclerViewAdapter myImgRecyclerViewAdapter = new MyImgRecyclerViewAdapter();
