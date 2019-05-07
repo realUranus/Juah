@@ -5,6 +5,7 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -23,11 +24,12 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 
 import com.google.gson.Gson;
+import com.realuranus.juah.fragment.HomeAdapter;
 
 public class JuahActivity extends AppCompatActivity {
     private final String TAG = "JuahActivity";
 
-    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager mLayoutManager;
 
     //
     private HandlerThread mHandlerThread;
@@ -85,7 +87,13 @@ public class JuahActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        RecyclerView recyclerView = findViewById(R.id.list);
+        RecyclerView recyclerView = findViewById(R.id.imgRecyclerView);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        String[] s = {"q","w","e"};
+        recyclerView.setAdapter(new HomeAdapter(s));
+
+
 //        MyImgRecyclerViewAdapter myImgRecyclerViewAdapter = new MyImgRecyclerViewAdapter();
 //        recyclerView.setAdapter();
 
