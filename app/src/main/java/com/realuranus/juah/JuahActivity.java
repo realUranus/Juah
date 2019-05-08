@@ -1,5 +1,9 @@
 package com.realuranus.juah;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
@@ -40,6 +44,8 @@ public class JuahActivity extends AppCompatActivity {
         }
     };
 
+    //broadcast
+    BroadcastReceiver mBroadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +54,16 @@ public class JuahActivity extends AppCompatActivity {
 
         Logger.addLogAdapter(new AndroidLogAdapter());
         Logger.t(TAG).i("onCreate");
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.realuranus.juah.START");
+        mBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+            }
+        };
+        registerReceiver(mBroadcastReceiver, intentFilter);
 
 //        initRetrofitData();
 
@@ -122,6 +138,12 @@ public class JuahActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
     }
 
     public void initRetrofitData(){
