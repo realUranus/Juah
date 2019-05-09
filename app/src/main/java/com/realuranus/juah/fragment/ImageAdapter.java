@@ -12,6 +12,8 @@ import com.realuranus.juah.R;
 import com.squareup.picasso.Picasso;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
+    final static String TAG = ImageAdapter.class.getSimpleName();
+
     //
     private String[] mData;
 
@@ -49,8 +51,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ImageAdapter.ImageViewHolder viewHolder, int i) {
-        viewHolder.getTextView().setText(mData[i]);
-        Picasso.get().load(mData[i]).into(viewHolder.getImageView());
+//        viewHolder.getTextView().setText(mData[i]);
+        Picasso.get()
+                .load(mData[i])
+//                .resize(50, 50)
+//                .centerCrop()
+                .into(viewHolder.getImageView());
     }
 
     @Override

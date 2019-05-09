@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_vertical">
 
     <TextView
@@ -12,7 +13,14 @@
     <ImageView
         android:contentDescription="@string/image_description"
         android:id="@+id/imageView"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageLike"
+        app:srcCompat="@drawable/ic_favorite_border_black_24dp"/>
 
 </FrameLayout>

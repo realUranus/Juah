@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +27,7 @@ import com.google.gson.Gson;
 import com.realuranus.juah.fragment.ImageAdapter;
 
 public class JuahActivity extends AppCompatActivity {
-    private final String TAG = "JuahActivity";
+    private final String TAG = JuahActivity.class.getSimpleName();
 
     RecyclerView.LayoutManager mLayoutManager;
 
@@ -60,26 +61,25 @@ public class JuahActivity extends AppCompatActivity {
         };
         registerReceiver(mBroadcastReceiver, intentFilter);
 
-//        initRetrofitData();
+//        OkHttpClient client = new OkHttpClient();
+//        new Thread(){
+//            @Override
+//            public void run(){
+//                Request request = new Request.Builder()
+//                        .url("https://api.pexels.com/v1/curated?per_page=3&page=1")
+//                        .addHeader("Authorization","563492ad6f9170000100000165f37ef6e33c4114b0c8e3ad19f1b868")
+//                        .build();
+//
+//                try (Response response = client.newCall(request).execute()) {
+//                    Gson gson = new Gson();
+//                    PageInfo pageInfo = gson.fromJson(response.body().string(), PageInfo.class);
+//                    Logger.t(TAG).i("num: " + pageInfo.getPageNumber());
+//                }catch (IOException e){
+//                    Logger.t(TAG).i("connect err");
+//                }
+//            }
+//        }.start();
 
-        OkHttpClient client = new OkHttpClient();
-        new Thread(){
-            @Override
-            public void run(){
-                Request request = new Request.Builder()
-                        .url("https://api.pexels.com/v1/curated?per_page=3&page=1")
-                        .addHeader("Authorization","563492ad6f9170000100000165f37ef6e33c4114b0c8e3ad19f1b868")
-                        .build();
-
-                try (Response response = client.newCall(request).execute()) {
-                    Gson gson = new Gson();
-                    PageInfo pageInfo = gson.fromJson(response.body().string(), PageInfo.class);
-                    Logger.t(TAG).i("num: " + pageInfo.getPageNumber());
-                }catch (IOException e){
-                    Logger.t(TAG).i("connect err");
-                }
-            }
-        }.start();
 
 
 
@@ -89,29 +89,23 @@ public class JuahActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
 //        String[] s = {"https://images.pexels.com/photos/2238295/pexels-photo-2238295.jpeg","https://images.pexels.com/photos/2225752/pexels-photo-2225752.jpeg","https://images.pexels.com/photos/2225380/pexels-photo-2225380.jpeg"};
 //        String[] s = {"https://images.pexels.com/photos/2238295/pexels-photo-2238295.jpeg"};
-        String[] s = {"https://images.pexels.com/photos/2225380/pexels-photo-2225380.jpeg?auto=compress&cs=tinysrgb&h=130"};
+//        String[] s = {"https://images.pexels.com/photos/2225380/pexels-photo-2225380.jpeg?auto=compress&cs=tinysrgb&h=130", "https://images.pexels.com/photos/2225752/pexels-photo-2225752.jpeg?auto=compress&cs=tinysrgb&h=350"};
+        String[] s = {"https://images.pexels.com/photos/2225380/pexels-photo-2225380.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "https://images.pexels.com/photos/2225752/pexels-photo-2225752.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"};
         recyclerView.setAdapter(new ImageAdapter(s));
 
+        //scroll
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        Request rq = new Request.Builder()
-//                .addHeader("Authorization","563492ad6f9170000100000165f37ef6e33c4114b0c8e3ad19f1b868")
-//                .url("https://api.pexels.com/v1/curated?per_page=15&page=1")
-//                .build();
-//        okHttpClient.newCall(rq).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//            }
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                Logger.t(TAG).i(response.toString());
-//            }
-//        });
-//        try {
-//            Response response = okHttpClient.newCall(rq).execute();
-//            Logger.i(response.toString());
-//        }catch (IOException e){
-//        }
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Logger.t(TAG).i("Scrolling");
+            }
+        });
     }
 
     @Override
