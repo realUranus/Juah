@@ -15,20 +15,15 @@ import android.support.v7.widget.RecyclerView;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.realuranus.juah.Picture.PageInfo;
-import com.realuranus.juah.Picture.Picture;
-import com.realuranus.juah.Picture.PictureService;
 
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
 
 import com.google.gson.Gson;
-import com.realuranus.juah.fragment.HomeAdapter;
+import com.realuranus.juah.fragment.ImageAdapter;
 
 public class JuahActivity extends AppCompatActivity {
     private final String TAG = "JuahActivity";
@@ -106,8 +101,8 @@ public class JuahActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.imgRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        String[] s = {"q","w","e"};
-        recyclerView.setAdapter(new HomeAdapter(s));
+        String[] s = {"one","two","three"};
+        recyclerView.setAdapter(new ImageAdapter(s));
 
 
 //        MyImgRecyclerViewAdapter myImgRecyclerViewAdapter = new MyImgRecyclerViewAdapter();
