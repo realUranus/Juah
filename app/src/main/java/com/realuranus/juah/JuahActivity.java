@@ -72,41 +72,25 @@ public class JuahActivity extends AppCompatActivity {
                         .build();
 
                 try (Response response = client.newCall(request).execute()) {
-
                     Gson gson = new Gson();
                     PageInfo pageInfo = gson.fromJson(response.body().string(), PageInfo.class);
                     Logger.t(TAG).i("num: " + pageInfo.getPageNumber());
-
                 }catch (IOException e){
+                    Logger.t(TAG).i("connect err");
                 }
             }
         }.start();
 
 
 
-        //test
-//        ImageView imageView = findViewById(R.id.hahah);
-//        ImageView imageView2 = findViewById(R.id.hahah2);
-//        Picasso.get().load("https://images.pexels.com/photos/2159549/pexels-photo-2159549.jpeg").into(imageView);
-//        Picasso.get().load("https://images.pexels.com/photos/2166641/pexels-photo-2166641.jpeg").into(imageView2);
-//
-//        Button getBtn = findViewById(R.id.getBtn);
-//        getBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Logger.t(TAG).i("get btn clicked");
-//            }
-//        });
 
         RecyclerView recyclerView = findViewById(R.id.imgRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        String[] s = {"one","two","three"};
+//        String[] s = {"https://images.pexels.com/photos/2238295/pexels-photo-2238295.jpeg","https://images.pexels.com/photos/2225752/pexels-photo-2225752.jpeg","https://images.pexels.com/photos/2225380/pexels-photo-2225380.jpeg"};
+//        String[] s = {"https://images.pexels.com/photos/2238295/pexels-photo-2238295.jpeg"};
+        String[] s = {"https://images.pexels.com/photos/2225380/pexels-photo-2225380.jpeg?auto=compress&cs=tinysrgb&h=130"};
         recyclerView.setAdapter(new ImageAdapter(s));
-
-
-//        MyImgRecyclerViewAdapter myImgRecyclerViewAdapter = new MyImgRecyclerViewAdapter();
-//        recyclerView.setAdapter();
 
 
 //        OkHttpClient okHttpClient = new OkHttpClient();
